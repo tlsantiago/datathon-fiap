@@ -50,14 +50,16 @@ if st.button("Avaliar Candidato"):
     prob = modelo.predict_proba(dados)[0][1]
     ajuste = 0.0
 
-    if nivel_prof in ["Pleno", "Sênior", "Especialista"] and vaga_nivel == "Júnior":
-        ajuste += 0.07
-    if ingles in ["Avançado", "Fluente"] and vaga_ingles in ["Nenhum", "Técnico", "Intermediário"]:
-        ajuste += 0.07
+    if nivel_prof in ["Pleno", "Sênior", "Especialista"] and vaga_nivel in ["Júnior", "Pleno"]:
+        ajuste += 0.10
+    if ingles in ["Avançado", "Fluente"] and vaga_ingles in ["Técnico", "Intermediário", "Avançado"]:
+        ajuste += 0.10
     if area_atuacao == vaga_area:
-        ajuste += 0.05
+        ajuste += 0.10
     if conhecimentos != "Sem conhecimento":
-        ajuste += 0.03
+        ajuste += 0.05
+    if nivel_academico in ["Superior", "Pós-graduação", "Mestrado", "Doutorado"] and vaga_nivel in ["Júnior", "Pleno", "Sênior"]:
+        ajuste += 0.05
 
     prob_ajustada = min(prob + ajuste, 1.0)
     percentual = round(prob_ajustada * 100, 2)
