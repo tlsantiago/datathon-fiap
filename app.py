@@ -15,7 +15,6 @@ with col1:
     nivel_academico = st.selectbox("Nível Acadêmico", ["Médio", "Técnico", "Tecnólogo", "Superior", "Pós-graduação", "Mestrado", "Doutorado"])
     ingles = st.selectbox("Inglês", ["Nenhum", "Técnico", "Intermediário", "Avançado", "Fluente"])
     espanhol = st.selectbox("Espanhol", ["Nenhum", "Técnico", "Intermediário", "Avançado", "Fluente"])
-    cliente = st.selectbox("Cliente", ["Bradesco", "Itaú", "Santander", "Outros"])
     tipo_contratacao = st.selectbox("Tipo de Contratação", ["CLT", "PJ", "Cooperado", "Estágio", "Outros"])
     vaga_nivel = st.selectbox("Nível da Vaga", ["Júnior", "Pleno", "Sênior", "Especialista"])
 
@@ -28,7 +27,6 @@ with col2:
     conhecimentos = st.selectbox("Conhecimentos Técnicos", [
         "Java", "Python", "SQL", "Cloud", "DevOps", "C#", "SAP", "Sem conhecimento", "Outros"
     ])
-    cv_pt = st.selectbox("CV em Português disponível?", ["Sim", "Não"])
     vaga_ingles = st.selectbox("Inglês Exigido na Vaga", ["Nenhum", "Técnico", "Intermediário", "Avançado", "Fluente"])
     vaga_area = st.selectbox("Área da Vaga", [
         "TI - Desenvolvimento", "Infraestrutura", "Dados", "Gestão de Projetos",
@@ -43,8 +41,6 @@ if st.button("Avaliar Candidato"):
         "informacoes_profissionais_area_atuacao": area_atuacao,
         "informacoes_profissionais_nivel_profissional": nivel_prof,
         "informacoes_profissionais_conhecimentos_tecnicos": conhecimentos,
-        "cv_pt": cv_pt,
-        "informacoes_basicas_cliente": cliente,
         "informacoes_basicas_tipo_contratacao": tipo_contratacao,
         "perfil_vaga_nivel profissional": vaga_nivel,
         "perfil_vaga_nivel_ingles": vaga_ingles,
@@ -60,8 +56,6 @@ if st.button("Avaliar Candidato"):
         ajuste += 0.07
     if area_atuacao == vaga_area:
         ajuste += 0.05
-    if cv_pt == "Sim":
-        ajuste += 0.03
     if conhecimentos != "Sem conhecimento":
         ajuste += 0.03
 
