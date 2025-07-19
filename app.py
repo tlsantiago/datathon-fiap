@@ -5,7 +5,8 @@ import joblib
 modelo = joblib.load("modelo_decision.pkl")
 
 st.set_page_config(page_title="Análise de Candidato", layout="wide")
-st.markdown("<h2 style='text-align: center;'>🔍 Avaliação de Candidatos com IA - Probabilidade de aderência à vaga</h2>", unsafe_allow_html=True)
+
+st.markdown("<h2 style='text-align: center;'>🔍 Avaliação de Candidatos com IA</h2>", unsafe_allow_html=True)
 st.markdown("---")
 
 col1, col2 = st.columns(2)
@@ -53,20 +54,16 @@ if st.button("Avaliar Candidato"):
     prob = modelo.predict_proba(dados)[0][1]
     ajuste = 0.0
 
-    senioridade_bonus = ["Pleno", "Sênior", "Especialista"]
-    if nivel_prof in senioridade_bonus and vaga_nivel == "Júnior":
-        ajuste += 0.05
-
-    ingles_ordem = {"Nenhum": 0, "Técnico": 1, "Intermediário": 2, "Avançado": 3, "Fluente": 4}
-    if ingles_ordem.get(ingles, 0) >= ingles_ordem.get(vaga_ingles, 0):
-        ajuste += 0.05
-
+    if nivel_prof in ["Pleno", "Sênior", "Especialista"] and vaga_nivel == "Júnior":
+        ajuste += 0.07
+    if ingles in ["Avançado", "Fluente"] and vaga_ingles in ["Nenhum", "Técnico", "Intermediário"]:
+        ajuste += 0.07
     if area_atuacao == vaga_area:
         ajuste += 0.05
     if cv_pt == "Sim":
         ajuste += 0.03
     if conhecimentos != "Sem conhecimento":
-        ajuste += 0.02
+        ajuste += 0.03
 
     prob_ajustada = min(prob + ajuste, 1.0)
     percentual = round(prob_ajustada * 100, 2)
