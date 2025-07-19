@@ -12,6 +12,6 @@ Para isso, desenvolvi um modelo que foca em prever se um candidato tem aderênci
 
 ## 📈 Resultados
 
-- Recall para candidatos contratados: **90%**
+- Recall para candidatos contratados: **68%**
 - Threshold ajustado no app para aumentar precisão
 - Modelo salvo como `modelo_decision.pkl` para leitura no app.py do streamlit
